@@ -14,8 +14,14 @@ class CreateUsersWorkdaysTable extends Migration
     public function up(): void
     {
         Schema::create('users_workdays', static function (Blueprint $table) {
-            $table->foreignId('user_id')->comment('Foreign id of user');
-            $table->foreignId('workday_id')->comment('Foreign id of day');
+            $table->foreignId('user_id')
+                ->constrained('users')
+                ->onUpdate('cascade')
+                ->onDelete('no action');
+            $table->foreignId('workday_id')
+                ->constrained('workdays')
+                ->onUpdate('cascade')
+                ->onDelete('no action');
             $table->timestampsTz();
             $table->softDeletesTz();
         });

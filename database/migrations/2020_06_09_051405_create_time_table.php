@@ -15,7 +15,10 @@ class CreateTimeTable extends Migration
     {
         Schema::create('time', static function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->comment('Foreign id of user');
+            $table->foreignId('user_id')
+                ->constrained('users')
+                ->onUpdate('cascade')
+                ->onDelete('no action');
             $table->timestampTz('start_activity')
                 ->comment('Real start timestamp of activity');
             $table->timestampTz('end_activity')
