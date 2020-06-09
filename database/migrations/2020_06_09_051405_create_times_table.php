@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTimeTable extends Migration
+class CreateTimesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateTimeTable extends Migration
      */
     public function up(): void
     {
-        Schema::create('time', static function (Blueprint $table) {
+        Schema::create('times', static function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')
                 ->constrained('users')
@@ -33,7 +33,7 @@ class CreateTimeTable extends Migration
             $table->timeTz('total_hours')
                 ->comment('Total hours of activity day')
                 ->nullable();
-            $table->timestamps();
+            $table->timestampsTz();
             $table->softDeletesTz();
         });
     }
@@ -45,6 +45,6 @@ class CreateTimeTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('time');
+        Schema::dropIfExists('times');
     }
 }
